@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; color: #1e293b; }
-    .official-doc { font-family: 'Amiri', serif; line-height: 1.2; }
+    .official-doc { font-family: 'Amiri', serif; line-height: 1.25; }
     * {
       font-variant-numeric: tabular-nums;
       -moz-font-feature-settings: "latn" 1;
@@ -59,7 +59,7 @@
       <form id="login-form" class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">المستخدم (رئيس / عضو الفريق)</label>
-          <select id="login-user" class="w-full border rounded-lg p-2.5 bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          <select id="login-user" class="w-full border rounded-lg p-2.5 bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none font-bold text-slate-800">
             <optgroup label="الإدارة والإشراف العام">
               <option value="د. عائشة بنت جميعان الجهني">د. عائشة بنت جميعان الجهني (رئيس الفريق التنفيذي)</option>
             </optgroup>
@@ -75,10 +75,10 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">كلمة المرور</label>
-          <input type="password" id="login-pass" value="123456" placeholder="كلمة المرور (افتراضي: 123456)" class="w-full border rounded-lg p-2.5 bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+          <input type="password" id="login-pass" value="123456" placeholder="كلمة المرور (افتراضي: 123456)" class="w-full border rounded-lg p-2.5 bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none font-mono">
         </div>
-        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg shadow transition">
-          دخول المنظومة
+        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg shadow transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-right-to-bracket"></i> دخول المنظومة
         </button>
       </form>
     </div>
@@ -89,7 +89,9 @@
     <header class="bg-emerald-800 text-white shadow sticky top-0 z-40 no-print">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <i class="fa-solid fa-graduation-cap text-2xl"></i>
+          <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white text-xl">
+            <i class="fa-solid fa-school"></i>
+          </div>
           <div>
             <h1 class="font-bold text-base md:text-lg leading-tight">إدارة دعم التميز المدرسي - قطاع العوالي</h1>
             <p class="text-[11px] text-emerald-200">استمارة التغذية الراجعة لمقدمي خدمات الدعم</p>
@@ -97,14 +99,14 @@
         </div>
         <div class="flex items-center gap-2 md:gap-3">
           <span class="text-xs bg-emerald-700/80 px-3 py-1.5 rounded-full border border-emerald-600 flex items-center gap-1.5">
-            <i class="fa-solid fa-user-check"></i>
+            <i class="fa-solid fa-user-check text-emerald-300"></i>
             <span id="current-user-display" class="font-semibold"></span>
           </span>
-          <button onclick="openSettingsModal()" title="إعدادات الحساب والتوقيع" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1">
-            <i class="fa-solid fa-signature"></i> <span class="hidden md:inline">حسابي وتوقيعي</span>
+          <button onclick="openSettingsModal()" title="إدارة التوقيع وكلمة المرور" class="text-xs bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-file-signature"></i> <span>توقيعي وحسابي</span>
           </button>
-          <button onclick="logout()" class="text-xs bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-lg font-bold transition">
-            <i class="fa-solid fa-power-off ml-1"></i> خروج
+          <button onclick="logout()" class="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1">
+            <i class="fa-solid fa-power-off"></i> خروج
           </button>
         </div>
       </div>
@@ -114,13 +116,13 @@
       <!-- أزرار التنقل العلوية (زر الإحصاءات يظهر حصرياً لرئيس الفريق) -->
       <div class="flex justify-between items-center mb-6 no-print flex-wrap gap-2">
         <div class="flex gap-2 flex-wrap">
-          <button id="btn-nav-analytics" onclick="showSection('analytics-section'); renderAnalyticsDashboard();" class="hidden px-4 py-2 bg-indigo-700 text-white rounded-lg font-bold hover:bg-indigo-800 shadow flex items-center gap-2 text-sm">
+          <button id="btn-nav-analytics" onclick="showSection('analytics-section'); renderAnalyticsDashboard();" class="hidden px-4 py-2 bg-indigo-700 text-white rounded-lg font-bold hover:bg-indigo-800 shadow flex items-center gap-2 text-sm transition">
             <i class="fa-solid fa-chart-pie"></i> لوحة الإحصاءات العامة
           </button>
-          <button onclick="showSection('list-section')" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 shadow-sm flex items-center gap-2 text-sm">
+          <button onclick="showSection('list-section')" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 shadow-sm flex items-center gap-2 text-sm transition">
             <i class="fa-solid fa-folder-open text-emerald-600"></i> التقارير المحفوظة
           </button>
-          <button id="btn-new-report" onclick="showSection('form-section'); resetForm();" class="px-4 py-2 bg-emerald-700 text-white rounded-lg font-bold hover:bg-emerald-800 shadow flex items-center gap-2 text-sm">
+          <button id="btn-new-report" onclick="showSection('form-section'); resetForm();" class="px-4 py-2 bg-emerald-700 text-white rounded-lg font-bold hover:bg-emerald-800 shadow flex items-center gap-2 text-sm transition">
             <i class="fa-solid fa-circle-plus"></i> إنشاء تقرير جديد
           </button>
         </div>
@@ -138,7 +140,7 @@
           </div>
           <div class="flex items-center gap-2">
             <button onclick="prepareAndPrintAnalyticsReport()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl shadow transition text-xs flex items-center gap-1.5">
-              <i class="fa-solid fa-file-invoice"></i> إصدار وطباعة التقرير الإحصائي المعتمد
+              <i class="fa-solid fa-print"></i> إصدار وطباعة التقرير الإحصائي المعتمد
             </button>
           </div>
         </div>
@@ -222,15 +224,15 @@
       <!-- نموذج مستند التقرير الإحصائي القابل للطباعة والتصدير لرئيس الفريق -->
       <section id="analytics-print-preview-section" class="hidden">
         <div class="no-print flex justify-between items-center bg-white p-4 rounded-xl shadow mb-4">
-          <button onclick="showSection('analytics-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs">
-            <i class="fa-solid fa-arrow-right ml-1"></i> رجوع للوحة الإحصاءات
+          <button onclick="showSection('analytics-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right"></i> رجوع للوحة الإحصاءات
           </button>
           <div class="flex gap-2">
-            <button onclick="window.print()" class="px-4 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-black text-xs">
-              <i class="fa-solid fa-print ml-1"></i> طباعة فورية
+            <button onclick="window.print()" class="px-4 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-black text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-print"></i> طباعة فورية
             </button>
-            <button onclick="exportAnalyticsToPdf()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-bold text-xs">
-              <i class="fa-solid fa-file-pdf ml-1"></i> تصدير ملف PDF معتمد
+            <button onclick="exportAnalyticsToPdf()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-bold text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-file-pdf"></i> تصدير ملف PDF معتمد
             </button>
           </div>
         </div>
@@ -247,7 +249,9 @@
             </div>
             
             <div class="text-center w-1/3">
-              <span class="font-black text-base border-b-2 border-black pb-0.5">وزارة التعليم</span>
+              <div class="font-bold text-sm border-2 border-slate-800 py-1 px-3 inline-block rounded">
+                <i class="fa-solid fa-award ml-1"></i> وزارة التعليم
+              </div>
             </div>
 
             <div class="text-right text-[11px] leading-relaxed font-bold text-slate-800 w-1/3 pr-6">
@@ -311,6 +315,7 @@
             </div>
           </div>
 
+          <!-- اعتماد وتوقيع رئيس الفريق التنفيذي -->
           <div class="mt-6 pt-3 border-t border-slate-400 flex justify-between items-center text-center text-xs">
             <div class="w-1/2">
               <p class="font-bold">منظومة دعم التميز المدرسي بقطاع العوالي</p>
@@ -320,7 +325,7 @@
               <p class="font-bold">رئيس الفريق التنفيذي لدعم التميز المدرسي بقطاع العوالي</p>
               <p id="stat-footer-leader-name" class="font-bold text-xs mt-0.5 text-slate-900">د. عائشة بنت جميعان الجهني</p>
               <div class="h-14 flex items-center justify-center">
-                <span class="text-xs font-serif italic text-slate-500">[معتمد إلكترونياً]</span>
+                <img id="stat-leader-signature-img" src="" alt="توقيع رئيس الفريق" class="max-h-12 object-contain">
               </div>
             </div>
           </div>
@@ -385,14 +390,14 @@
               </select>
             </div>
 
-            <!-- تفاصيل الاستمارة -->
+            <!-- أولاً: بيانات الزيارة والمدرسة -->
             <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-4">
               <h4 class="font-bold text-xs text-slate-700 uppercase tracking-wider border-b pb-2">أولاً: البيانات العامة للزيارة والمدرسة</h4>
               
               <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">الفصل الدراسي</label>
-                  <select id="term" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="term" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="الأول">الفصل الأول</option>
                     <option value="الثاني" selected>الفصل الثاني</option>
                     <option value="الثالث">الفصل الثالث</option>
@@ -419,7 +424,7 @@
               <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">تاريخ الزيارة</label>
-                  <input type="date" id="visit-date" class="w-full border rounded p-2 text-xs bg-white" required>
+                  <input type="date" id="visit-date" class="w-full border rounded p-2 text-xs bg-white font-bold" required>
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">اسم المدرسة</label>
@@ -431,7 +436,7 @@
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">الفئة</label>
-                  <select id="school-gender" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="school-gender" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="بنين">بنين</option>
                     <option value="بنات">بنات</option>
                   </select>
@@ -441,38 +446,39 @@
               <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">تواجد مقدم/ـة خدمات الدعم</label>
-                  <select id="provider-present" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="provider-present" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="نعم">نعم</option>
                     <option value="لا">لا</option>
                   </select>
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">اسم مقدم/ـة خدمات الدعم</label>
-                  <input type="text" id="provider-name" class="w-full border rounded p-2 text-xs bg-white" placeholder="اسم المشرف/ة">
+                  <input type="text" id="provider-name" class="w-full border rounded p-2 text-xs bg-white font-bold" placeholder="اسم المشرف/ة">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">نوع الدعم المقدم</label>
-                  <select id="support-type" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="support-type" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="حضوري">حضوري</option>
                     <option value="عن بعد">عن بعد</option>
                   </select>
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">تعبئة رابط التقرير الأسبوعي</label>
-                  <select id="weekly-report" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="weekly-report" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="نعم">نعم</option>
                     <option value="لا">لا</option>
                   </select>
                 </div>
               </div>
 
+              <!-- مجالات الدعم المقدمة -->
               <div class="pt-2 border-t">
                 <label class="block text-xs font-bold text-slate-700 mb-2">مجالات الدعم المقدمة خلال الزيارة:</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer"><input type="checkbox" id="sup-area-teach" checked> <span>التدريس</span></label>
-                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer"><input type="checkbox" id="sup-area-outcomes" checked> <span>نواتج التعلم</span></label>
-                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer"><input type="checkbox" id="sup-area-guidance" checked> <span>التوجيه الطلابي</span></label>
-                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer"><input type="checkbox" id="sup-area-activities" checked> <span>الأنشطة المدرسية</span></label>
+                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer font-bold"><input type="checkbox" id="sup-area-teach" checked> <span>التدريس</span></label>
+                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer font-bold"><input type="checkbox" id="sup-area-outcomes" checked> <span>نواتج التعلم</span></label>
+                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer font-bold"><input type="checkbox" id="sup-area-guidance" checked> <span>التوجيه الطلابي</span></label>
+                  <label class="flex items-center gap-2 bg-white p-2 rounded border cursor-pointer font-bold"><input type="checkbox" id="sup-area-activities" checked> <span>الأنشطة المدرسية</span></label>
                 </div>
               </div>
             </div>
@@ -483,7 +489,7 @@
               <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">نوع التقييم</label>
-                  <select id="eval-type" class="w-full border rounded p-2 text-xs bg-white">
+                  <select id="eval-type" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="خارجي" selected>خارجي</option>
                     <option value="ذاتي">ذاتي</option>
                     <option value="لم يصدر لها تقرير">لم يصدر لها تقرير</option>
@@ -491,19 +497,19 @@
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">مستوى الأداء العام</label>
-                  <input type="text" id="overall-level" value="التقدم" class="w-full border rounded p-2 text-xs bg-white">
+                  <input type="text" id="overall-level" value="التقدم" class="w-full border rounded p-2 text-xs bg-white font-bold">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">نسبة الأداء العام (%)</label>
-                  <input type="text" id="overall-score" value="73%" class="w-full border rounded p-2 text-xs bg-white">
+                  <input type="text" id="overall-score" value="73%" class="w-full border rounded p-2 text-xs bg-white font-bold">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">مستوى نواتج التعلم</label>
-                  <input type="text" id="outcomes-level" value="انطلاق" class="w-full border rounded p-2 text-xs bg-white">
+                  <input type="text" id="outcomes-level" value="انطلاق" class="w-full border rounded p-2 text-xs bg-white font-bold">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">نسبة نواتج التعلم (%)</label>
-                  <input type="text" id="outcomes-score" value="69.75%" class="w-full border rounded p-2 text-xs bg-white">
+                  <input type="text" id="outcomes-score" value="69.75%" class="w-full border rounded p-2 text-xs bg-white font-bold">
                 </div>
               </div>
             </div>
@@ -640,28 +646,30 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">التحديات التي تواجه مقدم/ـة خدمات دعم التميز المدرسي:</label>
-                <textarea id="challenges" rows="3" class="w-full border rounded p-2 text-xs bg-white"></textarea>
+                <textarea id="challenges" rows="3" class="w-full border rounded p-2 text-xs bg-white font-medium"></textarea>
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">نقاط القوة في أداء مقدم/ـة خدمات دعم التميز المدرسي:</label>
-                <textarea id="strengths" rows="3" class="w-full border rounded p-2 text-xs bg-white"></textarea>
+                <textarea id="strengths" rows="3" class="w-full border rounded p-2 text-xs bg-white font-medium"></textarea>
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">خلاصة التّغذية الرّاجعة المقدّمة من قبل عضو الفريق التّنفيذيّ:</label>
-                <textarea id="feedback" rows="3" class="w-full border rounded p-2 text-xs bg-white"></textarea>
+                <textarea id="feedback" rows="3" class="w-full border rounded p-2 text-xs bg-white font-medium"></textarea>
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">احتياجات التطوير المهني لمقدم/ـة خدمات دعم التميز المدرسي:</label>
-                <textarea id="dev-needs" rows="3" class="w-full border rounded p-2 text-xs bg-white"></textarea>
+                <textarea id="dev-needs" rows="3" class="w-full border rounded p-2 text-xs bg-white font-medium"></textarea>
               </div>
             </div>
 
             <div class="flex justify-end gap-3 pt-4 border-t">
               <button type="button" onclick="showSection('list-section')" class="px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg text-xs">إلغاء</button>
-              <button type="submit" class="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg shadow text-xs">حفظ واعتماد التقرير</button>
+              <button type="submit" class="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg shadow text-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-floppy-disk"></i> حفظ واعتماد التقرير
+              </button>
             </div>
           </form>
         </div>
@@ -670,25 +678,21 @@
       <!-- شاشة المعاينة والمستند الرسمي المطابق 100% -->
       <section id="preview-section" class="hidden">
         <div class="no-print flex justify-between items-center bg-white p-4 rounded-xl shadow mb-4">
-          <button onclick="showSection('list-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs">
-            <i class="fa-solid fa-arrow-right ml-1"></i> رجوع للقائمة
+          <button onclick="showSection('list-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right"></i> رجوع للقائمة
           </button>
           <div class="flex gap-2">
-            <button onclick="window.print()" class="px-4 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-black text-xs">
-              <i class="fa-solid fa-print ml-1"></i> طباعة فورية
+            <button onclick="window.print()" class="px-4 py-2 bg-slate-800 text-white rounded-lg font-bold hover:bg-black text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-print"></i> طباعة فورية
             </button>
-            <button onclick="exportToPdf()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-bold text-xs">
-              <i class="fa-solid fa-file-pdf ml-1"></i> تصدير مستند PDF
+            <button onclick="exportToPdf()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-bold text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-file-pdf"></i> تصدير مستند PDF
             </button>
           </div>
         </div>
 
-        <!-- المستند الرسمي المطابق للكليشة والبطاقة الرسمية -->
         <div id="printable-area" class="bg-white p-5 mx-auto shadow-2xl rounded-sm border border-slate-300 max-w-[850px] official-doc text-black">
-          
-          <!-- كليشة التقرير الرسمية المطابقة 100% للنموذج المرفق -->
           <div class="flex justify-between items-center border-b border-black pb-1.5 mb-2">
-            <!-- الترويسة اليمين -->
             <div class="text-center text-[10.5px] leading-tight font-bold text-slate-800 w-1/3">
               <p>المملكة العربية السعودية</p>
               <p>وزارة التعليم</p>
@@ -698,12 +702,12 @@
               <p>إدارة أداء التعليم — قسم الاشراف التربوي</p>
             </div>
             
-            <!-- الشعار في المنتصف -->
             <div class="text-center w-1/3">
-              <img src="data:image/png;base64,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" alt="وزارة التعليم" class="h-14 mx-auto object-contain">
+              <div class="font-bold text-sm border-2 border-slate-800 py-1 px-3 inline-block rounded">
+                <i class="fa-solid fa-award ml-1"></i> وزارة التعليم
+              </div>
             </div>
 
-            <!-- الترويسة اليسار -->
             <div class="text-right text-[11px] leading-relaxed font-bold text-slate-800 w-1/3 pr-6">
               <p>الرقم: <span id="pdf-doc-id" class="font-normal mr-1"></span></p>
               <p>التاريخ: <span id="pdf-doc-date" class="font-normal mr-1 border-b border-black inline-block min-w-[70px] text-center"></span> /</p>
@@ -711,17 +715,13 @@
             </div>
           </div>
 
-          <!-- العنوان -->
           <div class="text-center my-1">
             <h2 class="text-xs md:text-sm font-bold bg-slate-100 py-1 px-3 border border-black inline-block">
               تقرير التغذية الراجعة لمقدمي خدمات دعم التميز المدرسي خلال الفصل الدراسي <span id="pdf-term-display"></span> لعام <span id="pdf-year"></span> هـ
             </h2>
           </div>
 
-          <!-- أولاً: البيانات العامة للزيارة -->
           <div class="section-header">أولا: البيانات العامّة للزّيارة</div>
-          
-          <!-- جدول 1: تفاصيل الزيارة -->
           <table class="doc-table">
             <tr>
               <td class="table-label">رقم الزيارة:</td>
@@ -737,7 +737,6 @@
             </tr>
           </table>
 
-          <!-- جدول 2: حالة مقدم الدعم والمجالات -->
           <table class="doc-table">
             <tr>
               <td class="table-label">تواجد مقدم/ـة خدمات دعم التميز المدرسي:</td>
@@ -761,7 +760,6 @@
             </tr>
           </table>
 
-          <!-- جدول 3: بيانات المدرسة -->
           <table class="doc-table">
             <tr>
               <td class="table-label">اسم المدرسة</td>
@@ -775,7 +773,6 @@
             </tr>
           </table>
 
-          <!-- ثانياً: ملخص نتائج أداء المدرسة -->
           <div class="section-header">ثانيًا: ملخص نتائج أداء المدرسة وفق تقرير التقويم المدرسي الأخير</div>
           <table class="doc-table">
             <tr>
@@ -796,7 +793,6 @@
             </tr>
           </table>
 
-          <!-- ثالثاً: رحلة المدرسة في تحسين الممارسات -->
           <div class="section-header">ثالثًا: رحلة المدرسة في تحسين مجالات الممارسات الإشرافية الأساسية</div>
           <table class="doc-table">
             <thead>
@@ -829,7 +825,6 @@
             </tbody>
           </table>
 
-          <!-- رابعاً: تقديم خدمات دعم التميز -->
           <div class="section-header">رابعًا: تقديم خدمات دعم التميز المدرسي في مجالات الممارسات الإشرافية</div>
           <table class="doc-table">
             <thead>
@@ -880,7 +875,6 @@
             </tbody>
           </table>
 
-          <!-- الجدارات الوظيفية -->
           <div class="section-header">الجدارات الوظيفية:</div>
           <table class="doc-table">
             <thead>
@@ -919,7 +913,6 @@
             </tbody>
           </table>
 
-          <!-- الملاحظات والاحتياجات -->
           <table class="doc-table">
             <tr>
               <td class="table-label" style="width:25%;">التحديات التي تواجه مقدم/ـة خدمات دعم التميز المدرسي:</td>
@@ -939,21 +932,21 @@
             </tr>
           </table>
 
-          <!-- التوقيع الإلكتروني والاعتماد -->
+          <!-- التوقيع الإلكتروني الرسمي لكل عضو في التقرير -->
           <table class="doc-table mt-3" style="border:none;">
             <tr style="border:none;">
               <td style="border:none; width:50%; text-align:center;">
                 <p class="font-bold text-xs">مقدم/ة خدمات دعم التميز المدرسي</p>
                 <p id="pdf-footer-provider" class="font-semibold text-xs mt-1"></p>
-                <div class="h-10 flex items-center justify-center">
+                <div class="h-12 flex items-center justify-center">
                   <span class="text-slate-400 italic text-[10.5px]">[تم الاعتماد والتسليم إلكترونياً]</span>
                 </div>
               </td>
               <td style="border:none; width:50%; text-align:center;">
                 <p class="font-bold text-xs">مشرف/ـة الفريق التنفيذي</p>
                 <p id="pdf-footer-member" class="font-bold text-xs mt-1"></p>
-                <div class="h-10 flex items-center justify-center">
-                  <span class="text-xs font-serif italic text-slate-500">[معتمد إلكترونياً]</span>
+                <div class="h-12 flex items-center justify-center">
+                  <img id="pdf-signature-img" src="" alt="التوقيع الإلكتروني" class="max-h-11 object-contain">
                 </div>
               </td>
             </tr>
@@ -964,12 +957,12 @@
     </main>
   </div>
 
-  <!-- نافذة إعدادات المستخدم وتغيير كلمة المرور والتوقيع -->
+  <!-- نافذة إعدادات المستخدم وتحديث / رسم التوقيع الإلكتروني -->
   <div id="settings-modal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-200">
       <div class="flex justify-between items-center border-b pb-3 mb-4">
         <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-          <i class="fa-solid fa-user-gear text-emerald-600"></i> إعدادات الحساب والتوقيع
+          <i class="fa-solid fa-signature text-emerald-600"></i> إدارة التوقيع الإلكتروني والحساب
         </h3>
         <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
       </div>
@@ -985,16 +978,43 @@
           <input type="password" id="settings-new-pass" placeholder="أدخل كلمة مرور جديدة" class="w-full border rounded p-2 text-xs">
         </div>
 
+        <!-- خيار 1: رفع صورة توقيع -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">
+            <i class="fa-solid fa-cloud-arrow-up text-indigo-600 ml-1"></i> الخيار الأول: رفع ملف صورة التوقيع (PNG شفافة أو JPG)
+          </label>
+          <input type="file" id="settings-sig-file" accept="image/*" onchange="handleCustomSignature(this)" class="w-full border rounded p-1.5 text-xs bg-slate-50">
+        </div>
+
+        <!-- خيار 2: لوحة رسم التوقيع مباشرة بالماوس أو اللمس -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="block text-xs font-bold text-slate-700">
+              <i class="fa-solid fa-pen-nib text-emerald-600 ml-1"></i> الخيار الثاني: التوقيع المباشر باللمس أو الماوس
+            </label>
+            <button type="button" onclick="clearSignaturePad()" class="text-[10px] text-red-600 hover:underline font-bold">مسح اللوحة</button>
+          </div>
+          <canvas id="sig-pad-canvas" width="380" height="90" class="w-full h-24 border-2 border-dashed border-emerald-400 rounded-lg bg-slate-50 cursor-crosshair"></canvas>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">معاينة التوقيع المعتمد حالياً</label>
+          <div class="p-2 border rounded bg-slate-50 flex items-center justify-center h-16">
+            <img id="settings-sig-preview" src="" class="max-h-12 object-contain" alt="معاينة التوقيع">
+          </div>
+        </div>
+
         <div class="flex justify-end gap-2 pt-3 border-t">
           <button onclick="closeSettingsModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg text-xs">إلغاء</button>
-          <button onclick="saveUserSettings()" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-xs shadow">حفظ التغييرات</button>
+          <button onclick="saveUserSettings()" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-xs shadow flex items-center gap-1.5">
+            <i class="fa-solid fa-check"></i> حفظ التوقيع والبيانات
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // قاعدة بيانات المدارس لقطاع العوالي
     const SCHOOLS_DATA = [
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية الإمام أبي حنيفة النعمان", "gender": "بنين", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "أكرم ياسين أحمد الشريف", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية شوران", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "جايز دغيمان سميحان السليمي", "sector": "العوالي"},
@@ -1105,7 +1125,7 @@
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "الثانوية السادسة عشر بالمدينة - مسارات", "gender": "بنات", "stage": "ثانوي", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "نعم", "provider_name": "عبير صالح أحمد شرقاوي", "sector": "العوالي"},
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "المتوسطة الرابعة بالمدينة", "gender": "بنات", "stage": "متوسط", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "نعم", "provider_name": "سميه بلقاسم الطيب سليماني", "sector": "العوالي"},
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "الابتدائية السادسة عشربالمدينة", "gender": "بنات", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
-      {"member": "ريم بنت عبدالله حمد السحيمي", "name": "إبتدائية خديجة بنت الزبير بن العوام (طفولة مبكرة )", "gender": "بنات", "stage": "عام", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
+      {"member": "إبتدائية خديجة بنت الزبير بن العوام (طفولة مبكرة )", "name": "إبتدائية خديجة بنت الزبير بن العوام (طفولة مبكرة )", "gender": "بنات", "stage": "عام", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "الابتدائية الثالثة و الثلاثون بعد المائة بالمدينة طفولة مبكره", "gender": "بنات", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "الابتدائيه الاولى (طفوله مبكره) (المسبعة)", "gender": "بنات", "stage": "ابتدائي", "overall_level": "لا يوجد تصنيف", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
       {"member": "ريم بنت عبدالله حمد السحيمي", "name": "الابتدائية الحادية والثلاثون بعد المائة (طفولة مبكرة)", "gender": "بنات", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
@@ -1184,10 +1204,12 @@
     };
 
     let currentUser = null;
+    let tempNewSignature = null;
     let reports = JSON.parse(localStorage.getItem("excellence_reports_v2") || "[]");
     let chartMembers = null;
     let chartLevels = null;
 
+    // تسجيل الدخول
     document.getElementById("login-form").addEventListener("submit", function(e) {
       e.preventDefault();
       const user = document.getElementById("login-user").value;
@@ -1230,14 +1252,84 @@
       }
     }
 
+    let padCanvas, padCtx, isDrawing = false;
     function openSettingsModal() {
       document.getElementById("settings-user-name").value = currentUser;
       document.getElementById("settings-new-pass").value = "";
+      document.getElementById("settings-sig-preview").src = EXEC_MEMBERS[currentUser]?.signature || "";
+      tempNewSignature = null;
       document.getElementById("settings-modal").classList.remove("hidden");
+      initSignaturePad();
     }
 
     function closeSettingsModal() {
       document.getElementById("settings-modal").classList.add("hidden");
+    }
+
+    function handleCustomSignature(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          tempNewSignature = e.target.result;
+          document.getElementById("settings-sig-preview").src = tempNewSignature;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function initSignaturePad() {
+      padCanvas = document.getElementById("sig-pad-canvas");
+      padCtx = padCanvas.getContext("2d");
+      padCtx.lineWidth = 2.5;
+      padCtx.lineCap = "round";
+      padCtx.strokeStyle = "#1e293b";
+      clearSignaturePad();
+
+      function getPos(e) {
+        const rect = padCanvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: (clientX - rect.left) * (padCanvas.width / rect.width),
+          y: (clientY - rect.top) * (padCanvas.height / rect.height)
+        };
+      }
+
+      function start(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getPos(e);
+        padCtx.beginPath();
+        padCtx.moveTo(pos.x, pos.y);
+      }
+
+      function move(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        padCtx.lineTo(pos.x, pos.y);
+        padCtx.stroke();
+      }
+
+      function end(e) {
+        if (!isDrawing) return;
+        isDrawing = false;
+        tempNewSignature = padCanvas.toDataURL("image/png");
+        document.getElementById("settings-sig-preview").src = tempNewSignature;
+      }
+
+      padCanvas.onmousedown = start;
+      padCanvas.onmousemove = move;
+      padCanvas.onmouseup = end;
+      padCanvas.ontouchstart = start;
+      padCanvas.ontouchmove = move;
+      padCanvas.ontouchend = end;
+    }
+
+    function clearSignaturePad() {
+      if (padCtx && padCanvas) {
+        padCtx.clearRect(0, 0, padCanvas.width, padCanvas.height);
+      }
     }
 
     function saveUserSettings() {
@@ -1245,9 +1337,12 @@
       if (newPass) {
         EXEC_MEMBERS[currentUser].pass = newPass;
       }
+      if (tempNewSignature) {
+        EXEC_MEMBERS[currentUser].signature = tempNewSignature;
+      }
       localStorage.setItem("exec_members_config", JSON.stringify(EXEC_MEMBERS));
       closeSettingsModal();
-      alert("تم تحديث بيانات الحساب بنجاح!");
+      alert("تم حفظ التوقيع وبيانات الحساب بنجاح!");
     }
 
     function renderAnalyticsDashboard() {
@@ -1435,6 +1530,9 @@
       if (chartLevels) {
         document.getElementById("print-chart-img-2").src = chartLevels.toBase64Image();
       }
+
+      const leaderSig = EXEC_MEMBERS["د. عائشة بنت جميعان الجهني"]?.signature || "";
+      document.getElementById("stat-leader-signature-img").src = leaderSig;
 
       showSection("analytics-print-preview-section");
     }
@@ -1796,6 +1894,9 @@
 
       document.getElementById("pdf-footer-provider").innerText = item.providerName || 'مقدم الدعم';
       document.getElementById("pdf-footer-member").innerText = item.author;
+
+      const sigImg = document.getElementById("pdf-signature-img");
+      sigImg.src = EXEC_MEMBERS[item.author]?.signature || "";
 
       showSection("preview-section");
     }
