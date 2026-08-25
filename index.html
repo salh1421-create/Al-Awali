@@ -452,7 +452,7 @@
               </select>
             </div>
 
-            <!-- أولاً: بيانات الزيارة والمدرسة -->
+            <!-- أولاً: بيانات الزيارة والمدرسة وتاريخها وفق جدول الزيارات الرسمي -->
             <div class="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-4">
               <h4 class="font-bold text-xs text-slate-700 uppercase tracking-wider border-b pb-2">أولاً: البيانات العامة للزيارة والمدرسة</h4>
               
@@ -462,7 +462,6 @@
                   <select id="term" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="الأول">الفصل الأول</option>
                     <option value="الثاني" selected>الفصل الثاني</option>
-                
                   </select>
                 </div>
                 <div>
@@ -474,19 +473,43 @@
                   <input type="text" id="visit-num" value="الثانية" class="w-full border rounded p-2 text-xs bg-white font-medium">
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-600 mb-1">الأسبوع</label>
-                  <input type="text" id="visit-week" value="الحادي عشر" class="w-full border rounded p-2 text-xs bg-white font-medium">
+                  <label class="block text-xs font-bold text-slate-600 mb-1">الأسبوع (من جدول الزيارات)</label>
+                  <select id="visit-week" onchange="updateVisitDateFromSchedule()" class="w-full border rounded p-2 text-xs bg-white font-bold text-emerald-800">
+                    <option value="الأسبوع الثاني">الأسبوع الثاني</option>
+                    <option value="الأسبوع الثالث">الأسبوع الثالث</option>
+                    <option value="الأسبوع الرابع">الأسبوع الرابع</option>
+                    <option value="الأسبوع الخامس">الأسبوع الخامس</option>
+                    <option value="الأسبوع السادس">الأسبوع السادس</option>
+                    <option value="الأسبوع السابع">الأسبوع السابع</option>
+                    <option value="الأسبوع الثامن">الأسبوع الثامن</option>
+                    <option value="الأسبوع التاسع">الأسبوع التاسع</option>
+                    <option value="الأسبوع العاشر">الأسبوع العاشر</option>
+                    <option value="الأسبوع الحادي عشر" selected>الأسبوع الحادي عشر</option>
+                    <option value="الأسبوع الثاني عشر">الأسبوع الثاني عشر</option>
+                    <option value="الأسبوع الثالث عشر">الأسبوع الثالث عشر</option>
+                    <option value="الأسبوع الرابع عشر">الأسبوع الرابع عشر</option>
+                    <option value="الأسبوع الخامس عشر">الأسبوع الخامس عشر</option>
+                    <option value="الأسبوع السادس عشر">الأسبوع السادس عشر</option>
+                    <option value="الأسبوع السابع عشر">الأسبوع السابع عشر</option>
+                    <option value="الأسبوع الثامن عشر">الأسبوع الثامن عشر</option>
+                  </select>
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">اليوم</label>
-                  <input type="text" id="visit-day" value="الأحد" class="w-full border rounded p-2 text-xs bg-white font-medium">
+                  <select id="visit-day" onchange="updateVisitDateFromSchedule()" class="w-full border rounded p-2 text-xs bg-white font-bold text-emerald-800">
+                    <option value="الأحد" selected>الأحد</option>
+                    <option value="الإثنين">الإثنين</option>
+                    <option value="الثلاثاء">الثلاثاء</option>
+                    <option value="الأربعاء">الأربعاء</option>
+                    <option value="الخميس">الخميس</option>
+                  </select>
                 </div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div>
-                  <label class="block text-xs font-bold text-slate-600 mb-1">تاريخ الزيارة</label>
-                  <input type="date" id="visit-date" class="w-full border rounded p-2 text-xs bg-white font-bold" required>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">تاريخ الزيارة (تلقائي حسب الأسبوع واليوم)</label>
+                  <input type="text" id="visit-date" class="w-full border rounded p-2 text-xs bg-emerald-50 font-bold text-emerald-900 border-emerald-300" placeholder="28 جمادى الأولى 1448 هـ" required>
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-600 mb-1">اسم المدرسة</label>
@@ -1091,9 +1114,38 @@
   </div>
 
   <script>
+    // جدول مواعيد وتواريخ الزيارات المستخرجة بدقة من ملف الإكسل الرسمي
+    const VISIT_SCHEDULE = {
+      "الأسبوع الثاني": {"الأحد": "24 ربيع الأول 1448 هـ", "الإثنين": "25 ربيع الأول 1448 هـ", "الثلاثاء": "26 ربيع الأول 1448 هـ", "الأربعاء": "27 ربيع الأول 1448 هـ", "الخميس": "28 ربيع الأول 1448 هـ"},
+      "الأسبوع الثالث": {"الأحد": "2 ربيع الثاني 1448 هـ", "الإثنين": "3 ربيع الثاني 1448 هـ", "الثلاثاء": "4 ربيع الثاني 1448 هـ", "الأربعاء": "5 ربيع الثاني 1448 هـ", "الخميس": "6 ربيع الثاني 1448 هـ"},
+      "الأسبوع الرابع": {"الأحد": "9 ربيع الثاني 1448 هـ", "الإثنين": "10 ربيع الثاني 1448 هـ", "الثلاثاء": "11 ربيع الثاني 1448 هـ", "الأربعاء": "12 ربيع الثاني 1448 هـ", "الخميس": "13 ربيع الثاني 1448 هـ"},
+      "الأسبوع الخامس": {"الأحد": "16 ربيع الثاني 1448 هـ", "الإثنين": "17 ربيع الثاني 1448 هـ", "الثلاثاء": "18 ربيع الثاني 1448 هـ", "الأربعاء": "19 ربيع الثاني 1448 هـ", "الخميس": "20 ربيع الثاني 1448 هـ"},
+      "الأسبوع السادس": {"الأحد": "23 ربيع الثاني 1448 هـ", "الإثنين": "24 ربيع الثاني 1448 هـ", "الثلاثاء": "25 ربيع الثاني 1448 هـ", "الأربعاء": "26 ربيع الثاني 1448 هـ", "الخميس": "27 ربيع الثاني 1448 هـ"},
+      "الأسبوع السابع": {"الأحد": "30 ربيع الثاني 1448 هـ", "الإثنين": "1 جمادى الأولى 1448 هـ", "الثلاثاء": "2 جمادى الأولى 1448 هـ", "الأربعاء": "3 جمادى الأولى 1448 هـ", "الخميس": "4 جمادى الأولى 1448 هـ"},
+      "الأسبوع الثامن": {"الأحد": "7 جمادى الأولى 1448 هـ", "الإثنين": "8 جمادى الأولى 1448 هـ", "الثلاثاء": "9 جمادى الأولى 1448 هـ", "الأربعاء": "10 جمادى الأولى 1448 هـ", "الخميس": "11 جمادى الأولى 1448 هـ"},
+      "الأسبوع التاسع": {"الأحد": "14 جمادى الأولى 1448 هـ", "الإثنين": "15 جمادى الأولى 1448 هـ", "الثلاثاء": "16 جمادى الأولى 1448 هـ", "الأربعاء": "17 جمادى الأولى 1448 هـ", "الخميس": "18 جمادى الأولى 1448 هـ"},
+      "الأسبوع العاشر": {"الأحد": "21 جمادى الأولى 1448 هـ", "الإثنين": "22 جمادى الأولى 1448 هـ", "الثلاثاء": "23 جمادى الأولى 1448 هـ", "الأربعاء": "24 جمادى الأولى 1448 هـ", "الخميس": "25 جمادى الأولى 1448 هـ"},
+      "الأسبوع الحادي عشر": {"الأحد": "28 جمادى الأولى 1448 هـ", "الإثنين": "29 جمادى الأولى 1448 هـ", "الثلاثاء": "30 جمادى الأولى 1448 هـ", "الأربعاء": "1 جمادى الثانية 1448 هـ", "الخميس": "2 جمادى الثانية 1448 هـ"},
+      "الأسبوع الثاني عشر": {"الأحد": "5 جمادى الثانية 1448 هـ", "الإثنين": "6 جمادى الثانية 1448 هـ", "الثلاثاء": "7 جمادى الثانية 1448 هـ", "الأربعاء": "8 جمادى الثانية 1448 هـ", "الخميس": "9 جمادى الثانية 1448 هـ"},
+      "الأسبوع الثالث عشر": {"الأحد": "19 جمادى الثانية 1448 هـ", "الإثنين": "20 جمادى الثانية 1448 هـ", "الثلاثاء": "21 جمادى الثانية 1448 هـ", "الأربعاء": "22 جمادى الثانية 1448 هـ", "الخميس": "23 جمادى الثانية 1448 هـ"},
+      "الأسبوع الرابع عشر": {"الأحد": "26 جمادى الثانية 1448 هـ", "الإثنين": "27 جمادى الثانية 1448 هـ", "الثلاثاء": "28 جمادى الثانية 1448 هـ", "الأربعاء": "29 جمادى الثانية 1448 هـ", "الخميس": "1 رجب 1448 هـ"},
+      "الأسبوع الخامس عشر": {"الأحد": "4 رجب 1448 هـ", "الإثنين": "5 رجب 1448 هـ", "الثلاثاء": "6 رجب 1448 هـ", "الأربعاء": "7 رجب 1448 هـ", "الخميس": "8 رجب 1448 هـ"},
+      "الأسبوع السادس عشر": {"الأحد": "11 رجب 1448 هـ", "الإثنين": "12 رجب 1448 هـ", "الثلاثاء": "13 رجب 1448 هـ", "الأربعاء": "14 رجب 1448 هـ", "الخميس": "15 رجب 1448 هـ"},
+      "الأسبوع السابع عشر": {"الأحد": "18 رجب 1448 هـ", "الإثنين": "19 رجب 1448 هـ", "الثلاثاء": "20 رجب 1448 هـ", "الأربعاء": "21 رجب 1448 هـ", "الخميس": "22 رجب 1448 هـ"},
+      "الأسبوع الثامن عشر": {"الأحد": "25 رجب 1448 هـ", "الإثنين": "26 رجب 1448 هـ", "الثلاثاء": "27 رجب 1448 هـ", "الأربعاء": "28 رجب 1448 هـ", "الخميس": "29 رجب 1448 هـ"}
+    };
+
+    function updateVisitDateFromSchedule() {
+      const week = document.getElementById("visit-week").value;
+      const day = document.getElementById("visit-day").value;
+      if (VISIT_SCHEDULE[week] && VISIT_SCHEDULE[week][day]) {
+        document.getElementById("visit-date").value = VISIT_SCHEDULE[week][day];
+      }
+    }
+
     const SCHOOLS_DATA = [
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية الإمام أبي حنيفة النعمان", "gender": "بنين", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "أكرم ياسين أحمد الشريف", "sector": "العوالي"},
-      {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية شوران", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "جايز دغيمان سميحan السليمي", "sector": "العوالي"},
+      {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية شوران", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "جايز دغيمان سميحان السليمي", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية الإمام احمد بن حنبل", "gender": "بنين", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "محمد بن صالح بن يعقوب عفيفي", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية السعودية", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "عادل بن سالم بن عوض حسينون", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "الإمام يعقوب بن اسحاق الحضرمي لتحفيظ القرآن الكريم", "gender": "بنين", "stage": "عام", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
@@ -1317,6 +1369,7 @@
 
       populateSchoolSelect();
       renderReportsTable();
+      updateVisitDateFromSchedule();
 
       // إظهار لوحة الإحصاءات والتقرير الإحصائي حصرياً لرئيس الفريق
       if (isLeader) {
@@ -1972,7 +2025,7 @@
     function resetForm() {
       document.getElementById("report-form").reset();
       document.getElementById("edit-id").value = "";
-      document.getElementById("visit-date").value = new Date().toISOString().split("T")[0];
+      updateVisitDateFromSchedule();
     }
 
     function previewReport(id) {
