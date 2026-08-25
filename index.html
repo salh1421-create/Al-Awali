@@ -36,12 +36,11 @@
       border-bottom: none;
       margin-top: 3px;
     }
-    .moe-logo-img {
-      display: block !important;
-      visibility: visible !important;
-      object-fit: contain !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+    .moe-logo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     @media print {
       body * { visibility: hidden; }
@@ -57,9 +56,11 @@
   <div id="login-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-200">
       <div class="text-center mb-6">
-        <img src="moe-logo.png" onerror="this.onerror=null; this.src='https://www.moe.gov.sa/_layouts/15/MOE.Internet.Portal.Home/Images/logo.png';" alt="شعار وزارة التعليم" class="moe-logo-img" style="height: 75px; width: auto; max-width: 140px; margin: 0 auto 12px auto;">
-        <h2 class="text-2xl font-bold text-slate-800">بوابة الفريق التنفيذي قطاع العوالي</h2>
-        <p class="text-xs text-slate-500 mt-1">منظومة تقارير دعم التميز المدرسي - الفريق التنفيذي قطاع العوالي</p>
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-slate-800">بوابة الفريق التنفيذي</h2>
+        <p class="text-xs text-slate-500 mt-1">منظومة تقارير دعم التميز المدرسي - قطاع العوالي</p>
       </div>
       <form id="login-form" class="space-y-4">
         <div>
@@ -94,11 +95,11 @@
     <header class="bg-emerald-800 text-white shadow sticky top-0 z-40 no-print">
       <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="bg-white px-2 py-1 rounded-lg shadow-sm flex items-center justify-center">
-            <img src="moe-logo.png" onerror="this.onerror=null; this.src='https://www.moe.gov.sa/_layouts/15/MOE.Internet.Portal.Home/Images/logo.png';" alt="شعار وزارة التعليم" class="moe-logo-img" style="height: 38px; width: auto; max-width: 80px;">
+          <div class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-white text-lg">
+            <i class="fa-solid fa-school"></i>
           </div>
           <div>
-            <h1 class="font-bold text-base md:text-lg leading-tight">إدارة أداء التعليم - قسم الاشراف التربوي - الفريق التنفيذي قطاع العوالي</h1>
+            <h1 class="font-bold text-base md:text-lg leading-tight">إدارة أداء التعليم -قسم الاشراف التربوي -الفريق التنفيذي قطاع العوالي</h1>
             <p class="text-[11px] text-emerald-200">استمارة التغذية الراجعة لمقدمي خدمات الدعم</p>
           </div>
         </div>
@@ -133,7 +134,7 @@
         </div>
       </div>
 
-      <!-- قسم لوحة الإحصاءات والرسوم البيانية -->
+      <!-- قسم لوحة الإحصاءات والرسوم البيانية (لرئيس الفريق) -->
       <section id="analytics-section" class="hidden no-print space-y-6">
         <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white p-5 rounded-2xl shadow flex justify-between items-center flex-wrap gap-4">
           <div>
@@ -150,6 +151,7 @@
           </div>
         </div>
 
+        <!-- فلاتر لوحة الإحصاءات -->
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap gap-3 items-center justify-between">
           <div class="flex items-center gap-2 text-xs font-bold text-slate-700">
             <i class="fa-solid fa-filter text-indigo-600"></i> فلاتر لوحة الإحصاءات:
@@ -171,7 +173,6 @@
           </div>
         </div>
 
-        <!-- بطاقات المؤشرات -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
@@ -203,7 +204,6 @@
           </div>
         </div>
 
-        <!-- الرسوم البيانية -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
             <h4 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
@@ -249,7 +249,7 @@
         </div>
       </section>
 
-      <!-- نموذج التقرير الإحصائي القابل للطباعة -->
+      <!-- نموذج مستند التقرير الإحصائي القابل للطباعة والتصدير لرئيس الفريق -->
       <section id="analytics-print-preview-section" class="hidden">
         <div class="no-print flex justify-between items-center bg-white p-4 rounded-xl shadow mb-4">
           <button onclick="showSection('analytics-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs flex items-center gap-1.5">
@@ -276,8 +276,11 @@
               <p>إدارة أداء التعليم — قسم الاشراف التربوي</p>
             </div>
             
-            <div class="text-center w-1/3">
-              <img src="moe-logo.png" onerror="this.onerror=null; this.src='https://www.moe.gov.sa/_layouts/15/MOE.Internet.Portal.Home/Images/logo.png';" alt="وزارة التعليم" class="moe-logo-img" style="height: 65px; width: auto; max-width: 130px; margin: 0 auto;">
+            <div class="text-center w-1/3 moe-logo-box">
+              <div class="border-2 border-slate-800 py-1 px-4 rounded text-center font-bold text-xs bg-slate-50">
+                <p class="text-sm font-black text-emerald-800">وزارة التعليم</p>
+                <p class="text-[9px] text-slate-600 font-sans tracking-wide">Ministry of Education</p>
+              </div>
             </div>
 
             <div class="text-right text-[11px] leading-relaxed font-bold text-slate-800 w-1/3 pr-6">
@@ -341,10 +344,11 @@
             </div>
           </div>
 
+          <!-- اعتماد وتوقيع رئيس الفريق التنفيذي -->
           <div class="mt-6 pt-3 border-t border-slate-400 flex justify-between items-center text-center text-xs">
             <div class="w-1/2">
               <p class="font-bold">منظومة دعم التميز المدرسي بقطاع العوالي</p>
-              <p class="text-[10px] text-slate-600 mt-1">تم إعداد وتوليد التقرير آلياً عبر المنظومة السحابية</p>
+              <p class="text-[10px] text-slate-600 mt-1"></p>
             </div>
             <div class="w-1/2">
               <p class="font-bold">رئيس الفريق التنفيذي لدعم التميز المدرسي بقطاع العوالي</p>
@@ -358,7 +362,7 @@
         </div>
       </section>
 
-      <!-- قائمة التقارير المحفوظة -->
+      <!-- قائمة التقارير المحفوظة مع شريط الفلاتر الشاملة -->
       <section id="list-section" class="hidden no-print">
         <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
           <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 flex-wrap gap-3">
@@ -368,6 +372,7 @@
             <span id="report-count" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">0 تقرير</span>
           </div>
 
+          <!-- شريط الفلاتر المتقدمة لقائمة التقارير -->
           <div class="p-3.5 bg-slate-50/50 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label class="block text-[11px] font-bold text-slate-600 mb-1">
@@ -421,7 +426,7 @@
         </div>
       </section>
 
-      <!-- نموذج تعبئة التقرير -->
+      <!-- نموذج تعبئة واستكمال التقرير -->
       <section id="form-section" class="hidden no-print">
         <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 md:p-8">
           <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
@@ -457,7 +462,7 @@
                   <select id="term" class="w-full border rounded p-2 text-xs bg-white font-bold">
                     <option value="الأول">الفصل الأول</option>
                     <option value="الثاني" selected>الفصل الثاني</option>
-                    <option value="الثالث">الفصل الثالث</option>
+                   
                   </select>
                 </div>
                 <div>
@@ -528,6 +533,7 @@
                 </div>
               </div>
 
+              <!-- مجالات الدعم المقدمة -->
               <div class="pt-2 border-t">
                 <label class="block text-xs font-bold text-slate-700 mb-2">مجالات الدعم المقدمة خلال الزيارة:</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
@@ -570,7 +576,7 @@
               </div>
             </div>
 
-            <!-- ثالثاً: رحلة المدرسة في تحسين الممارسات -->
+            <!-- ثالثاً: رحلة المدرسة في تحسين الممارسات الإشرافية الأساسية -->
             <div class="border border-slate-200 rounded-xl p-4 bg-white space-y-3">
               <h4 class="font-bold text-xs text-slate-700 uppercase tracking-wider border-b pb-2">ثالثًا: رحلة المدرسة في تحسين مجالات الممارسات الإشرافية الأساسية</h4>
               <div class="space-y-2">
@@ -612,7 +618,7 @@
               </div>
             </div>
 
-            <!-- رابعاً: تقديم خدمات دعم التميز -->
+            <!-- رابعاً: تقديم خدمات دعم التميز المدرسي في مجالات الممارسات الإشرافية -->
             <div class="border border-slate-200 rounded-xl p-4 bg-white space-y-3">
               <h4 class="font-bold text-xs text-slate-700 uppercase tracking-wider border-b pb-2">رابعًا: تقديم خدمات دعم التميز المدرسي في مجالات الممارسات الإشرافية</h4>
               <div class="space-y-2">
@@ -698,7 +704,7 @@
               </div>
             </div>
 
-            <!-- المخرجات النهائية -->
+            <!-- الحقول النصية والمخرجات النهائية -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">التحديات التي تواجه مقدم/ـة خدمات دعم التميز المدرسي:</label>
@@ -731,7 +737,7 @@
         </div>
       </section>
 
-      <!-- شاشة المعاينة والمستند الرسمي المطابق -->
+      <!-- شاشة المعاينة والمستند الرسمي المطابق 100% -->
       <section id="preview-section" class="hidden">
         <div class="no-print flex justify-between items-center bg-white p-4 rounded-xl shadow mb-4">
           <button onclick="showSection('list-section')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-xs flex items-center gap-1.5">
@@ -748,6 +754,7 @@
         </div>
 
         <div id="printable-area" class="bg-white p-5 mx-auto shadow-2xl rounded-sm border border-slate-300 max-w-[850px] official-doc text-black">
+          <!-- كليشة التقرير الرسمية -->
           <div class="flex justify-between items-center border-b border-black pb-1.5 mb-2">
             <div class="text-center text-[10.5px] leading-tight font-bold text-slate-800 w-1/3">
               <p>المملكة العربية السعودية</p>
@@ -758,10 +765,14 @@
               <p>إدارة أداء التعليم — قسم الاشراف التربوي</p>
             </div>
             
-            <div class="text-center w-1/3">
-              <img src="moe-logo.png" onerror="this.onerror=null; this.src='https://www.moe.gov.sa/_layouts/15/MOE.Internet.Portal.Home/Images/logo.png';" alt="وزارة التعليم" class="moe-logo-img" style="height: 65px; width: auto; max-width: 130px; margin: 0 auto;">
+            <div class="text-center w-1/3 moe-logo-box">
+              <div class="border-2 border-slate-800 py-1 px-4 rounded text-center font-bold text-xs bg-slate-50">
+                <p class="text-sm font-black text-emerald-800">وزارة التعليم</p>
+                <p class="text-[9px] text-slate-600 font-sans tracking-wide">Ministry of Education</p>
+              </div>
             </div>
 
+            <!-- الترويسة اليسار -->
             <div class="text-right text-[11px] leading-relaxed font-bold text-slate-800 w-1/3 pr-6">
               <p>الرقم: <span id="pdf-doc-id" class="font-normal mr-1"></span></p>
               <p>التاريخ: <span id="pdf-doc-date" class="font-normal mr-1 border-b border-black inline-block min-w-[70px] text-center"></span> /</p>
@@ -769,14 +780,17 @@
             </div>
           </div>
 
+          <!-- العنوان -->
           <div class="text-center my-1">
             <h2 class="text-xs md:text-sm font-bold bg-slate-100 py-1 px-3 border border-black inline-block">
               تقرير التغذية الراجعة لمقدمي خدمات دعم التميز المدرسي خلال الفصل الدراسي <span id="pdf-term-display"></span> لعام <span id="pdf-year"></span> هـ
             </h2>
           </div>
 
+          <!-- أولاً: البيانات العامة للزيارة -->
           <div class="section-header">أولا: البيانات العامّة للزّيارة</div>
           
+          <!-- جدول 1: تفاصيل الزيارة -->
           <table class="doc-table">
             <tr>
               <td class="table-label">رقم الزيارة:</td>
@@ -792,6 +806,7 @@
             </tr>
           </table>
 
+          <!-- جدول 2: حالة مقدم الدعم والمجالات -->
           <table class="doc-table">
             <tr>
               <td class="table-label">تواجد مقدم/ـة خدمات دعم التميز المدرسي:</td>
@@ -815,6 +830,7 @@
             </tr>
           </table>
 
+          <!-- جدول 3: بيانات المدرسة -->
           <table class="doc-table">
             <tr>
               <td class="table-label">اسم المدرسة</td>
@@ -828,6 +844,7 @@
             </tr>
           </table>
 
+          <!-- ثانياً: ملخص نتائج أداء المدرسة -->
           <div class="section-header">ثانيًا: ملخص نتائج أداء المدرسة وفق تقرير التقويم المدرسي الأخير</div>
           <table class="doc-table">
             <tr>
@@ -848,6 +865,7 @@
             </tr>
           </table>
 
+          <!-- ثالثاً: رحلة المدرسة في تحسين الممارسات -->
           <div class="section-header">ثالثًا: رحلة المدرسة في تحسين مجالات الممارسات الإشرافية الأساسية</div>
           <table class="doc-table">
             <thead>
@@ -880,6 +898,7 @@
             </tbody>
           </table>
 
+          <!-- رابعاً: تقديم خدمات دعم التميز -->
           <div class="section-header">رابعًا: تقديم خدمات دعم التميز المدرسي في مجالات الممارسات الإشرافية</div>
           <table class="doc-table">
             <thead>
@@ -930,6 +949,7 @@
             </tbody>
           </table>
 
+          <!-- الجدارات الوظيفية -->
           <div class="section-header">الجدارات الوظيفية:</div>
           <table class="doc-table">
             <thead>
@@ -968,6 +988,7 @@
             </tbody>
           </table>
 
+          <!-- الملاحظات والاحتياجات -->
           <table class="doc-table">
             <tr>
               <td class="table-label" style="width:25%;">التحديات التي تواجه مقدم/ـة خدمات دعم التميز المدرسي:</td>
@@ -987,20 +1008,21 @@
             </tr>
           </table>
 
+          <!-- التوقيع الإلكتروني والاعتماد -->
           <table class="doc-table mt-3" style="border:none;">
             <tr style="border:none;">
               <td style="border:none; width:50%; text-align:center;">
                 <p class="font-bold text-xs">مقدم/ة خدمات دعم التميز المدرسي</p>
                 <p id="pdf-footer-provider" class="font-semibold text-xs mt-1"></p>
                 <div class="h-12 flex items-center justify-center">
-                  <span class="text-slate-400 italic text-[10.5px]">[التوقيع]</span>
+                  <span class="text-slate-400 italic text-[10.5px]">[تم الاعتماد والتسليم إلكترونياً]</span>
                 </div>
               </td>
               <td style="border:none; width:50%; text-align:center;">
                 <p class="font-bold text-xs">مشرف/ـة الفريق التنفيذي</p>
                 <p id="pdf-footer-member" class="font-bold text-xs mt-1"></p>
                 <div class="h-12 flex items-center justify-center">
-                  <img id="pdf-signature-img" src="" crossorigin="anonymous" alt="التوقيع الإلكتروني" class="max-h-11 object-contain">
+                  <img id="pdf-signature-img" src="" alt="التوقيع الإلكتروني" class="max-h-11 object-contain">
                 </div>
               </td>
             </tr>
@@ -1011,7 +1033,7 @@
     </main>
   </div>
 
-  <!-- نافذة إعدادات المستخدم -->
+  <!-- نافذة إعدادات المستخدم وتحديث / رسم التوقيع الإلكتروني -->
   <div id="settings-modal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-200">
       <div class="flex justify-between items-center border-b pb-3 mb-4">
@@ -1032,6 +1054,7 @@
           <input type="password" id="settings-new-pass" placeholder="أدخل كلمة مرور جديدة" class="w-full border rounded p-2 text-xs">
         </div>
 
+        <!-- خيار 1: رفع صورة توقيع -->
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">
             <i class="fa-solid fa-cloud-arrow-up text-indigo-600 ml-1"></i> الخيار الأول: رفع ملف صورة التوقيع (PNG شفافة أو JPG)
@@ -1039,6 +1062,7 @@
           <input type="file" id="settings-sig-file" accept="image/*" onchange="handleCustomSignature(this)" class="w-full border rounded p-1.5 text-xs bg-slate-50">
         </div>
 
+        <!-- خيار 2: لوحة رسم التوقيع مباشرة بالماوس أو اللمس -->
         <div>
           <div class="flex justify-between items-center mb-1">
             <label class="block text-xs font-bold text-slate-700">
@@ -1069,7 +1093,7 @@
   <script>
     const SCHOOLS_DATA = [
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية الإمام أبي حنيفة النعمان", "gender": "بنين", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "أكرم ياسين أحمد الشريف", "sector": "العوالي"},
-      {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية شوران", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "جايز دغيمان سميحان السليمي", "sector": "العوالي"},
+      {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية شوران", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "جايز دغيمان سميحan السليمي", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية الإمام احمد بن حنبل", "gender": "بنين", "stage": "ابتدائي", "overall_level": "التقدم", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "محمد بن صالح بن يعقوب عفيفي", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "ابتدائية السعودية", "gender": "بنين", "stage": "ابتدائي", "overall_level": "الانطلاق", "outcomes_level": "الانطلاق", "has_provider": "نعم", "provider_name": "عادل بن سالم بن عوض حسينون", "sector": "العوالي"},
       {"member": "أنس بن ناجي رشيد الرحيلي", "name": "الإمام يعقوب بن اسحاق الحضرمي لتحفيظ القرآن الكريم", "gender": "بنين", "stage": "عام", "overall_level": "التقدم", "outcomes_level": "التقدم", "has_provider": "لا", "provider_name": "", "sector": "العوالي"},
@@ -1294,6 +1318,7 @@
       populateSchoolSelect();
       renderReportsTable();
 
+      // إظهار لوحة الإحصاءات والتقرير الإحصائي حصرياً لرئيس الفريق
       if (isLeader) {
         if (navAnalyticsBtn) navAnalyticsBtn.classList.remove("hidden");
         showSection('analytics-section');
@@ -1398,6 +1423,7 @@
       alert("تم حفظ التوقيع وبيانات الحساب بنجاح!");
     }
 
+    // بناء وتصفية لوحة الإحصاءات العامة لرئيس الفريق
     function renderAnalyticsDashboard() {
       const stageFilter = document.getElementById("analytics-filter-stage")?.value || "الكل";
       const levelFilter = document.getElementById("analytics-filter-level")?.value || "الكل";
@@ -1475,6 +1501,7 @@
         tbody.appendChild(tr);
       });
 
+      // رسم بياني 1
       const ctx1 = document.getElementById('chart-members-reports').getContext('2d');
       if (chartMembers) chartMembers.destroy();
       chartMembers = new Chart(ctx1, {
@@ -1509,6 +1536,7 @@
         }
       });
 
+      // رسم بياني 2
       let countTakadom = 0, countIntilaq = 0, countTamayuz = 0, countNone = 0;
       filteredSchools.forEach(s => {
         if (s.overall_level.includes("التميز")) countTamayuz++;
@@ -1617,7 +1645,7 @@
         margin:       [3, 3, 3, 3],
         filename:     `التقرير_الإحصائي_الشامل_لدعم_التميز_قطاع_العوالي.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, allowTaint: true, logging: false },
+        html2canvas:  { scale: 2, useCORS: true, allowTaint: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
@@ -1792,6 +1820,7 @@
       const isLeader = (currentUser === "د. عائشة بنت جميعان الجهني" || EXEC_MEMBERS[currentUser]?.role === "leader");
       let userReports = isLeader ? reports : reports.filter(r => r.author === currentUser);
 
+      // تطبيق الفلاتر
       if (filterKeyword) {
         const kw = filterKeyword.toLowerCase().trim();
         userReports = userReports.filter(r => 
@@ -1823,16 +1852,19 @@
       userReports.forEach((item, idx) => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-slate-50 transition border-b";
-        tr.innerHTML = `
-          <td class="p-3 font-semibold">${idx + 1}</td>
-          <td class="p-3 font-bold text-slate-900">${item.schoolName}</td>
-          <td class="p-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-semibold text-[11px]">${item.schoolStage || '-'}</span></td>
-          <td class="p-3"><span class="bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded text-[11px]">${item.overallLevel || 'لم يصدر'}</span></td>
-          <td class="p-3">${item.term} / ${item.visitWeek}</td>
-          <td class="p-3">${item.visitDate}</td>
-          <td class="p-3 text-slate-600">${item.providerName || '-'}</td>
-          <td class="p-3 text-slate-600 text-xs font-semibold">${item.author}</td>
-          <td class="p-3 text-center">
+
+        // تحديد أزرار الإجراءات وفق صلاحية المستخدم (رئيس الفريق: معاينة فقط)
+        let actionsHtml = '';
+        if (isLeader) {
+          actionsHtml = `
+            <div class="flex items-center justify-center">
+              <button onclick="previewReport('${item.id}')" title="معاينة والاطلاع على التقرير" class="px-3 py-1 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-md font-bold text-xs flex items-center gap-1">
+                <i class="fa-solid fa-eye"></i> <span>اطلاع ومعاينة</span>
+              </button>
+            </div>
+          `;
+        } else {
+          actionsHtml = `
             <div class="flex items-center justify-center gap-1.5">
               <button onclick="previewReport('${item.id}')" title="معاينة وطباعة" class="p-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded">
                 <i class="fa-solid fa-file-pdf"></i>
@@ -1844,13 +1876,31 @@
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
-          </td>
+          `;
+        }
+
+        tr.innerHTML = `
+          <td class="p-3 font-semibold">${idx + 1}</td>
+          <td class="p-3 font-bold text-slate-900">${item.schoolName}</td>
+          <td class="p-3"><span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-semibold text-[11px]">${item.schoolStage || '-'}</span></td>
+          <td class="p-3"><span class="bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded text-[11px]">${item.overallLevel || 'لم يصدر'}</span></td>
+          <td class="p-3">${item.term} / ${item.visitWeek}</td>
+          <td class="p-3">${item.visitDate}</td>
+          <td class="p-3 text-slate-600">${item.providerName || '-'}</td>
+          <td class="p-3 text-slate-600 text-xs font-semibold">${item.author}</td>
+          <td class="p-3 text-center">${actionsHtml}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
     function editReport(id) {
+      const isLeader = (currentUser === "د. عائشة بنت جميعان الجهني" || EXEC_MEMBERS[currentUser]?.role === "leader");
+      if (isLeader) {
+        alert("تعديل التقارير متاح فقط للعضو معد التقرير.");
+        return;
+      }
+
       const item = reports.find(r => r.id === id);
       if (!item) return;
 
@@ -1906,12 +1956,16 @@
     }
 
     function deleteReport(id) {
+      const isLeader = (currentUser === "د. عائشة بنت جميعان الجهني" || EXEC_MEMBERS[currentUser]?.role === "leader");
+      if (isLeader) {
+        alert("حساب رئيس الفريق مخصص للاطلاع والمتابعة فقط ولا يملك صلاحية حذف التقارير.");
+        return;
+      }
+
       if (confirm("هل ترغب في حذف هذا التقرير نهائياً؟")) {
         reports = reports.filter(r => r.id !== id);
         localStorage.setItem("excellence_reports_v2", JSON.stringify(reports));
         applyAllFilters();
-        const isLeader = (currentUser === "د. عائشة بنت جميعان الجهني" || EXEC_MEMBERS[currentUser]?.role === "leader");
-        if (isLeader) renderAnalyticsDashboard();
       }
     }
 
@@ -1999,12 +2053,12 @@
 
     function exportToPdf() {
       const element = document.getElementById('printable-area');
-      const school = document.getElementById('pdf-school-name').innerText || 'المدرسة';
+      const school = document.getElementById('pdf-school-name').innerText;
       const opt = {
         margin:       [3, 3, 3, 3],
         filename:     `تقرير_التغذية_الراجعة_${school}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, allowTaint: true, logging: false },
+        html2canvas:  { scale: 2, useCORS: true, allowTaint: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
