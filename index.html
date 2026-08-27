@@ -36,11 +36,12 @@
       border-bottom: none;
       margin-top: 3px;
     }
-    .moe-logo-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .moe-logo-img {
+      display: block !important;
+      visibility: visible !important;
+      object-fit: contain !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
     @media print {
       body * { visibility: hidden; }
@@ -56,9 +57,7 @@
   <div id="login-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-200">
       <div class="text-center mb-6">
-        <div class="w-16 h-16 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
-          <i class="fa-solid fa-graduation-cap"></i>
-        </div>
+        <img src="moe-logo.png" alt="شعار وزارة التعليم" class="moe-logo-img mx-auto mb-3" style="height: 75px; max-width: 140px;" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/moe-gov-sa/assets/main/logo.png';">
         <h2 class="text-2xl font-bold text-slate-800">بوابة الفريق التنفيذي</h2>
         <p class="text-xs text-slate-500 mt-1">منظومة تقارير دعم التميز المدرسي - قطاع العوالي</p>
       </div>
@@ -95,8 +94,8 @@
     <header class="bg-emerald-800 text-white shadow sticky top-0 z-40 no-print">
       <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center text-white text-lg">
-            <i class="fa-solid fa-school"></i>
+          <div class="bg-white px-2 py-1 rounded-lg shadow-sm flex items-center justify-center">
+            <img src="moe-logo.png" alt="شعار وزارة التعليم" class="moe-logo-img" style="height: 38px; max-width: 80px;" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/moe-gov-sa/assets/main/logo.png';">
           </div>
           <div>
             <h1 class="font-bold text-base md:text-lg leading-tight">إدارة أداء التعليم - قسم الاشراف التربوي - الفريق التنفيذي قطاع العوالي</h1>
@@ -134,7 +133,7 @@
         </div>
       </div>
 
-      <!-- قسم لوحة الإحصاءات والرسوم البيانية (لرئيس الفريق) -->
+      <!-- قسم لوحة الإحصاءات والرسوم البيانية المعتمدة -->
       <section id="analytics-section" class="hidden no-print space-y-6">
         <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white p-5 rounded-2xl shadow flex justify-between items-center flex-wrap gap-4">
           <div>
@@ -176,8 +175,8 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
-              <p class="text-xs font-bold text-slate-500">إجمالي المدارس</p>
-              <h3 class="text-2xl font-black text-slate-800 mt-1" id="stat-total-schools">0</h3>
+              <p class="text-xs font-bold text-slate-500">إجمالي مدارس الإسناد</p>
+              <h3 class="text-2xl font-black text-slate-800 mt-1" id="stat-total-schools">173</h3>
             </div>
             <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-school"></i></div>
           </div>
@@ -191,7 +190,7 @@
           <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div>
               <p class="text-xs font-bold text-slate-500">مقدمو خدمات الدعم</p>
-              <h3 class="text-2xl font-black text-amber-600 mt-1" id="stat-total-providers">0</h3>
+              <h3 class="text-2xl font-black text-amber-600 mt-1" id="stat-total-providers">57</h3>
             </div>
             <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-user-tie"></i></div>
           </div>
@@ -276,11 +275,8 @@
               <p>إدارة أداء التعليم — قسم الاشراف التربوي</p>
             </div>
             
-            <div class="text-center w-1/3 moe-logo-box">
-              <div class="border-2 border-slate-800 py-1 px-4 rounded text-center font-bold text-xs bg-slate-50">
-                <p class="text-sm font-black text-emerald-800">وزارة التعليم</p>
-                <p class="text-[9px] text-slate-600 font-sans tracking-wide">Ministry of Education</p>
-              </div>
+            <div class="text-center w-1/3">
+              <img src="moe-logo.png" alt="وزارة التعليم" class="moe-logo-img mx-auto" style="height: 65px; max-width: 130px;" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/moe-gov-sa/assets/main/logo.png';">
             </div>
 
             <div class="text-right text-[11px] leading-relaxed font-bold text-slate-800 w-1/3 pr-6">
@@ -299,15 +295,15 @@
           <div class="grid grid-cols-4 gap-2 my-2 text-center text-[10.5px]">
             <div class="border border-black p-1.5 bg-slate-50">
               <span class="font-bold block">إجمالي مدارس القطاع</span>
-              <span id="print-stat-schools" class="font-black text-sm"></span>
+              <span id="print-stat-schools" class="font-black text-sm">173</span>
             </div>
             <div class="border border-black p-1.5 bg-slate-50">
               <span class="font-bold block">التقارير المنجزة</span>
-              <span id="print-stat-reports" class="font-black text-sm text-indigo-800"></span>
+              <span id="print-stat-reports" class="font-black text-sm text-indigo-800">0</span>
             </div>
             <div class="border border-black p-1.5 bg-slate-50">
               <span class="font-bold block">مقدمو خدمات الدعم</span>
-              <span id="print-stat-providers" class="font-black text-sm text-emerald-800"></span>
+              <span id="print-stat-providers" class="font-black text-sm text-emerald-800">57</span>
             </div>
             <div class="border border-black p-1.5 bg-slate-50">
               <span class="font-bold block">أعضاء الفريق التنفيذي</span>
@@ -788,11 +784,8 @@
               <p>إدارة أداء التعليم — قسم الاشراف التربوي</p>
             </div>
             
-            <div class="text-center w-1/3 moe-logo-box">
-              <div class="border-2 border-slate-800 py-1 px-4 rounded text-center font-bold text-xs bg-slate-50">
-                <p class="text-sm font-black text-emerald-800">وزارة التعليم</p>
-                <p class="text-[9px] text-slate-600 font-sans tracking-wide">Ministry of Education</p>
-              </div>
+            <div class="text-center w-1/3">
+              <img src="moe-logo.png" alt="وزارة التعليم" class="moe-logo-img mx-auto" style="height: 65px; max-width: 130px;" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/moe-gov-sa/assets/main/logo.png';">
             </div>
 
             <!-- الترويسة اليسار -->
@@ -1284,7 +1277,7 @@
       alert("تم حفظ التوقيع وبيانات الحساب بنجاح!");
     }
 
-    // بناء وتصفية لوحة الإحصاءات العامة لرئيس الفريق
+    // بناء وتصفية لوحة الإحصاءات العامة بدقة 100%
     function renderAnalyticsDashboard() {
       const stageFilter = document.getElementById("analytics-filter-stage")?.value || "الكل";
       const levelFilter = document.getElementById("analytics-filter-level")?.value || "الكل";
@@ -1306,7 +1299,9 @@
       
       const providersSet = new Set();
       filteredSchools.forEach(s => {
-        if (s.provider_name && s.provider_name.trim()) providersSet.add(s.provider_name.trim());
+        if (s.provider_name && s.provider_name.trim() && s.has_provider === "نعم") {
+          providersSet.add(s.provider_name.trim());
+        }
       });
       
       document.getElementById("stat-total-schools").innerText = totalSchools;
@@ -1330,10 +1325,11 @@
       tbody.innerHTML = "";
 
       membersList.forEach(m => {
-        const assignedSchools = filteredSchools.filter(s => s.member.includes(m.name.split(" ")[0]) || s.member === m.name);
+        // مطابقة دقيقة للاسم لتجنب أي تداخل في الحسابات
+        const assignedSchools = filteredSchools.filter(s => s.member.trim() === m.name.trim());
         const withProv = assignedSchools.filter(s => s.has_provider === "نعم").length;
         const withoutProv = assignedSchools.filter(s => s.has_provider !== "نعم").length;
-        const memberReports = reports.filter(r => r.author === m.name || (r.author && r.author.includes(m.name.split(" ")[0])));
+        const memberReports = reports.filter(r => r.author && r.author.trim() === m.name.trim());
         
         const perc = assignedSchools.length > 0 ? Math.round((memberReports.length / assignedSchools.length) * 100) : 0;
 
@@ -1439,7 +1435,9 @@
       const totalReports = reports.length;
       const providersSet = new Set();
       SCHOOLS_DATA.forEach(s => {
-        if (s.provider_name && s.provider_name.trim()) providersSet.add(s.provider_name.trim());
+        if (s.provider_name && s.provider_name.trim() && s.has_provider === "نعم") {
+          providersSet.add(s.provider_name.trim());
+        }
       });
 
       document.getElementById("stat-doc-id").innerText = "STAT-" + Date.now().toString().substring(6);
@@ -1461,10 +1459,10 @@
       printTbody.innerHTML = "";
 
       membersList.forEach((m, idx) => {
-        const assignedSchools = SCHOOLS_DATA.filter(s => s.member.includes(m.name.split(" ")[0]) || s.member === m.name);
+        const assignedSchools = SCHOOLS_DATA.filter(s => s.member.trim() === m.name.trim());
         const withProv = assignedSchools.filter(s => s.has_provider === "نعم").length;
         const withoutProv = assignedSchools.filter(s => s.has_provider !== "نعم").length;
-        const memberReports = reports.filter(r => r.author === m.name || (r.author && r.author.includes(m.name.split(" ")[0])));
+        const memberReports = reports.filter(r => r.author && r.author.trim() === m.name.trim());
         const perc = assignedSchools.length > 0 ? Math.round((memberReports.length / assignedSchools.length) * 100) : 0;
 
         const tr = document.createElement("tr");
@@ -1529,7 +1527,7 @@
         });
         select.appendChild(group);
       } else {
-        const mySchools = SCHOOLS_DATA.filter(s => s.member.includes(currentUser.split(" ")[0]) || s.member === currentUser);
+        const mySchools = SCHOOLS_DATA.filter(s => s.member.trim() === currentUser.trim());
         const otherSchools = SCHOOLS_DATA.filter(s => !mySchools.includes(s));
 
         if (mySchools.length > 0) {
@@ -1714,7 +1712,6 @@
         const tr = document.createElement("tr");
         tr.className = "hover:bg-slate-50 transition border-b";
 
-        // تحديد أزرار الإجراءات وفق صلاحية المستخدم (رئيس الفريق: معاينة فقط)
         let actionsHtml = '';
         if (isLeader) {
           actionsHtml = `
